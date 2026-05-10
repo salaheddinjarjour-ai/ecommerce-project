@@ -6,24 +6,115 @@
     <title>Trendit OS — Multi-Vendor Marketplace</title>
     <meta name="description" content="Trendit OS is a modern multi-vendor e-commerce marketplace featuring AI-powered shopping assistance, curated products from top vendors, and a seamless checkout experience." />
     <meta name="theme-color" content="#0452C8" />
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Trendit OS — Multi-Vendor Marketplace" />
     <meta property="og:description" content="Shop curated products from top vendors with AI-powered support on Trendit OS." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/hero-bg.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Trendit OS — The largest refined marketplace in Lebanon" />
+    <meta property="og:site_name" content="Trendit OS" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Trendit OS — Multi-Vendor Marketplace" />
     <meta name="twitter:description" content="Shop curated products from top vendors with AI-powered support on Trendit OS." />
     <meta name="twitter:image" content="/hero-bg.png" />
+    <meta name="twitter:image:alt" content="Trendit OS Marketplace" />
 
-    <!-- Favicon (inline SVG as data URI — swap for a real .ico if available) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230452C8'/><text y='.9em' font-size='70' x='15' fill='white'>T</text></svg>" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Loading screen — pure CSS, zero JS dependency -->
+    <style>
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.4s ease;
+      }
+      #app-loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .load-logo {
+        width: 72px;
+        height: 72px;
+        background: #0452C8;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Outfit', Arial, sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        color: white;
+        margin-bottom: 28px;
+        box-shadow: 0 16px 40px rgba(4, 82, 200, 0.28);
+        animation: load-pulse 1.8s ease-in-out infinite;
+      }
+      .load-spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid #e2e8f0;
+        border-top-color: #0452C8;
+        border-radius: 50%;
+        animation: load-spin 0.75s linear infinite;
+        margin-bottom: 18px;
+      }
+      .load-label {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #94a3b8;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      @keyframes load-spin  { to { transform: rotate(360deg); } }
+      @keyframes load-pulse {
+        0%, 100% { transform: scale(1);    box-shadow: 0 16px 40px rgba(4,82,200,0.28); }
+        50%       { transform: scale(1.06); box-shadow: 0 20px 52px rgba(4,82,200,0.42); }
+      }
+    </style>
   </head>
   <body>
+    <!-- Branded loading screen visible instantly before any JS loads -->
+    <div id="app-loading" aria-hidden="true">
+      <div class="load-logo">T</div>
+      <div class="load-spinner"></div>
+      <p class="load-label">Loading Trendit OS</p>
+    </div>
+
+    <!-- React mounts here -->
     <div id="root"></div>
+
+    <!-- No-JS fallback: shown to crawlers and users with JS disabled -->
+    <noscript>
+      <style>
+        #app-loading { display: none !important; }
+        #noscript-fallback { display: block !important; }
+      </style>
+      <div id="noscript-fallback" style="display:none;font-family:system-ui,-apple-system,sans-serif;max-width:640px;margin:80px auto;padding:40px 24px;text-align:center;">
+        <div style="width:72px;height:72px;background:#0452C8;border-radius:20px;display:inline-flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:white;margin-bottom:28px;">T</div>
+        <h1 style="font-size:30px;font-weight:800;color:#0f172a;margin:0 0 14px;letter-spacing:-0.02em;">Trendit OS — Multi-Vendor Marketplace</h1>
+        <p style="font-size:17px;color:#475569;line-height:1.7;margin:0 0 16px;">The largest refined marketplace in Lebanon. Curated quality products, delivered in record time to your doorstep.</p>
+        <p style="font-size:15px;color:#94a3b8;background:#f1f5f9;display:inline-block;padding:12px 24px;border-radius:12px;">⚠️ Please enable JavaScript to use Trendit OS.</p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

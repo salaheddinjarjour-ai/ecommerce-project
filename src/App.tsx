@@ -32,6 +32,7 @@ import { AdminCategories } from './pages/admin/AdminCategories';
 import { AdminCMS } from './pages/admin/AdminCMS';
 import { AdminSettings } from './pages/admin/AdminSettings';
 import { FlowShaderBackground } from './components/FlowShaderBackground';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 // A wrapper component for public/storefront routes to include the Header and Footer
 const StorefrontLayout = ({ children }: { children: React.ReactNode }) => (
@@ -50,45 +51,47 @@ const StorefrontLayout = ({ children }: { children: React.ReactNode }) => (
 
 export default function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <CmsProvider>
-          <Router>
-            <ScrollToTop />
-            <div className="min-h-screen font-sans">
-              <Routes>
-                {/* Storefront Routes */}
-                <Route path="/" element={<StorefrontLayout><Home /></StorefrontLayout>} />
-                <Route path="/product/:id" element={<StorefrontLayout><Product /></StorefrontLayout>} />
-                <Route path="/category/:id" element={<StorefrontLayout><Category /></StorefrontLayout>} />
-                <Route path="/login" element={<StorefrontLayout><Login /></StorefrontLayout>} />
-                <Route path="/account" element={<StorefrontLayout><Account /></StorefrontLayout>} />
-                <Route path="/categories" element={<StorefrontLayout><CategoriesPage /></StorefrontLayout>} />
-                <Route path="/vendor/:id" element={<StorefrontLayout><VendorProfile /></StorefrontLayout>} />
-                <Route path="/search" element={<StorefrontLayout><SearchResults /></StorefrontLayout>} />
+    <ErrorBoundary>
+      <AuthProvider>
+        <CartProvider>
+          <CmsProvider>
+            <Router>
+              <ScrollToTop />
+              <div className="min-h-screen font-sans">
+                <Routes>
+                  {/* Storefront Routes */}
+                  <Route path="/" element={<StorefrontLayout><Home /></StorefrontLayout>} />
+                  <Route path="/product/:id" element={<StorefrontLayout><Product /></StorefrontLayout>} />
+                  <Route path="/category/:id" element={<StorefrontLayout><Category /></StorefrontLayout>} />
+                  <Route path="/login" element={<StorefrontLayout><Login /></StorefrontLayout>} />
+                  <Route path="/account" element={<StorefrontLayout><Account /></StorefrontLayout>} />
+                  <Route path="/categories" element={<StorefrontLayout><CategoriesPage /></StorefrontLayout>} />
+                  <Route path="/vendor/:id" element={<StorefrontLayout><VendorProfile /></StorefrontLayout>} />
+                  <Route path="/search" element={<StorefrontLayout><SearchResults /></StorefrontLayout>} />
 
-                {/* Admin Routes */}
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route index element={<AdminOverview />} />
-                  <Route path="products" element={<AdminProducts />} />
-                  <Route path="products/:id" element={<AdminProductForm />} />
-                  <Route path="vendors" element={<AdminVendors />} />
-                  <Route path="orders" element={<AdminOrders />} />
-                  <Route path="categories" element={<AdminCategories />} />
-                  <Route path="customers" element={<AdminCustomers />} />
-                  <Route path="marketing" element={<AdminMarketing />} />
-                  <Route path="reviews" element={<AdminReviews />} />
-                  <Route path="analytics" element={<AdminAnalytics />} />
-                  <Route path="finance" element={<AdminFinance />} />
-                  <Route path="cms" element={<AdminCMS />} />
-                  <Route path="settings" element={<AdminSettings />} />
-                </Route>
-              </Routes>
-            </div>
-          </Router>
-        </CmsProvider>
-      </CartProvider>
-    </AuthProvider>
+                  {/* Admin Routes */}
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminOverview />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="products/:id" element={<AdminProductForm />} />
+                    <Route path="vendors" element={<AdminVendors />} />
+                    <Route path="orders" element={<AdminOrders />} />
+                    <Route path="categories" element={<AdminCategories />} />
+                    <Route path="customers" element={<AdminCustomers />} />
+                    <Route path="marketing" element={<AdminMarketing />} />
+                    <Route path="reviews" element={<AdminReviews />} />
+                    <Route path="analytics" element={<AdminAnalytics />} />
+                    <Route path="finance" element={<AdminFinance />} />
+                    <Route path="cms" element={<AdminCMS />} />
+                    <Route path="settings" element={<AdminSettings />} />
+                  </Route>
+                </Routes>
+              </div>
+            </Router>
+          </CmsProvider>
+        </CartProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
