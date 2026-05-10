@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
+# Environment files — never commit real secrets
+.env
+.env.local
+.env.*.local
+
+# Keep the template
+!.env.example
+
+# Wrangler local state
+.wrangler/
